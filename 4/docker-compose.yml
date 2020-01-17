@@ -19,7 +19,7 @@ services:
       # It tells whoami to start listening on 8082 instead of 80
       - --port=8082
     labels:
-      - "traefik.http.routers.my-app.rule=Host(`whoami.docker.localhost`)"
+      - "traefik.http.routers.my-app.rule=Host(`your.domain.com`)"
       - "traefik.http.services.my-app.loadbalancer.server.port=8082"
 
 # Dashboard (https://localhost:8080)

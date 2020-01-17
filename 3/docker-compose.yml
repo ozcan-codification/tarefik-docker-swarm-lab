@@ -8,15 +8,15 @@ services:
       - --providers.docker
       - --api.insecure
     ports:
-      - "81:80"
-      - "8181:8080"
+      - "80:80"
+      - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   my-app:
-    image: containous/whoami:v1.3.0
+    image: containous/whoami
     labels:
-      - "traefik.http.routers.my-app.rule=Host(`whoami.docker.localhost`)"
+      - "traefik.http.routers.my-app.rule=Host(`your.domain.com`)"
 
 # Dashboard (https://localhost:8080)
-# Route (http://whoami.docker.localhost/)
+# Route (http://your.domain.com/)

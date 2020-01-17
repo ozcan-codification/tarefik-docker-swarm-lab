@@ -4,8 +4,8 @@ services:
   traefik:
     image: "traefik:v2.0.1"
     command:
-      - --entrypoints.web.address=:8880
-      - --entrypoints.websecure.address=:4443
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
       - --providers.docker
       - --api.insecure
       - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
@@ -13,8 +13,8 @@ services:
       - --certificatesresolvers.leresolver.acme.storage=/acme.json
       - --certificatesresolvers.leresolver.acme.tlschallenge=true
     ports:
-      - "8880:80"
-      - "4443:443"
+      - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -23,7 +23,7 @@ services:
   my-app:
     image: containous/whoami:v1.3.0
     labels:
-      - "traefik.http.routers.my-app.rule=Host(`whoami.docker.localhost`)"
+      - "traefik.http.routers.my-app.rule=Host(`your.domain.com`)"
       - "traefik.http.routers.my-app.middlewares=auth"
       - "traefik.http.routers.my-app.entrypoints=websecure"
       - "traefik.http.routers.my-app.tls.certresolver=leresolver"
